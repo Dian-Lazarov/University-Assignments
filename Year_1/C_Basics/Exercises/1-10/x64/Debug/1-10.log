@@ -1,0 +1,5 @@
+﻿  1-10.cpp
+C:\Users\Linko\Desktop\University\Bakalavur\I kurs\I semestur\Programming\console apps\C\1-10\1-10.cpp(10,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
+C:\Users\Linko\Desktop\University\Bakalavur\I kurs\I semestur\Programming\console apps\C\1-10\1-10.cpp(15,16): warning C4566: character represented by universal-character-name '\u0434' cannot be represented in the current code page (1252)
+C:\Users\Linko\Desktop\University\Bakalavur\I kurs\I semestur\Programming\console apps\C\1-10\1-10.cpp(15,16): warning C4566: character represented by universal-character-name '\u0430' cannot be represented in the current code page (1252)
+  1-10.vcxproj -> C:\Users\Linko\Desktop\University\Bakalavur\I kurs\I semestur\Programming\console apps\C\1-10\x64\Debug\1-10.exe

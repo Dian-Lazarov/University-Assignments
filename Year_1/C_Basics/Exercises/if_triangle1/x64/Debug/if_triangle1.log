@@ -1,0 +1,3 @@
+﻿  if_triangle1.cpp
+C:\Users\Linko\Desktop\University\Bakalavur\I kurs\I semestur\Programming\console apps\C\if_triangle1\if_triangle1.cpp(6,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
+  if_triangle1.vcxproj -> C:\Users\Linko\Desktop\University\Bakalavur\I kurs\I semestur\Programming\console apps\C\if_triangle1\x64\Debug\if_triangle1.exe
