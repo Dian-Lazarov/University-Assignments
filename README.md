@@ -1,2 +1,2 @@
 # University_Assignments
-This repo contains all my programming university assignments.
+This repository contains all my programming assignments from university.
