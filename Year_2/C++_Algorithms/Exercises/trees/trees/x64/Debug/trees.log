@@ -1,0 +1,3 @@
+﻿  Struct_Tree.cpp
+C:\Users\Linko\Desktop\University\Bachelor\II kurs\III semestur\SA_ALG\console apps\trees\Struct_Tree.cpp(119,6): warning C4326: return type of 'main' should be 'int' instead of 'void'
+  trees.vcxproj -> C:\Users\Linko\Desktop\University\Bachelor\II kurs\III semestur\SA_ALG\console apps\trees\x64\Debug\trees.exe
