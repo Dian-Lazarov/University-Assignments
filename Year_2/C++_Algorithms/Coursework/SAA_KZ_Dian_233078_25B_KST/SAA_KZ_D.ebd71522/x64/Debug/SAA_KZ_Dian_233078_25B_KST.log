@@ -1,0 +1,3 @@
+﻿  Flights.cpp
+C:\Users\Linko\Desktop\SAA_KZ_Dian_233078_25B_KST\Flights.cpp(94,6): warning C4326: return type of 'main' should be 'int' instead of 'void'
+  SAA_KZ_Dian_233078_25B_KST.vcxproj -> C:\Users\Linko\Desktop\SAA_KZ_Dian_233078_25B_KST\x64\Debug\SAA_KZ_Dian_233078_25B_KST.exe
