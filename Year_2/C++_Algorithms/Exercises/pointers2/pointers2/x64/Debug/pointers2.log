@@ -1,0 +1,3 @@
+﻿  Source.cpp
+C:\Users\Linko\Desktop\pointers2\Source.cpp(12,6): warning C4326: return type of 'main' should be 'int' instead of 'void'
+  pointers2.vcxproj -> C:\Users\Linko\Desktop\pointers2\x64\Debug\pointers2.exe
