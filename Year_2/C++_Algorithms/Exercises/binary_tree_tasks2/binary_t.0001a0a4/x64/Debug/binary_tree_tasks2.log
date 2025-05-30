@@ -1,0 +1,3 @@
+﻿  BinaryTreeTasks2.cpp
+C:\Users\Linko\Desktop\University\Bachelor\II kurs\III semestur\SA_ALG\console apps\binary_tree_tasks2\BinaryTreeTasks2.cpp(173,6): warning C4326: return type of 'main' should be 'int' instead of 'void'
+  binary_tree_tasks2.vcxproj -> C:\Users\Linko\Desktop\University\Bachelor\II kurs\III semestur\SA_ALG\console apps\binary_tree_tasks2\x64\Debug\binary_tree_tasks2.exe
