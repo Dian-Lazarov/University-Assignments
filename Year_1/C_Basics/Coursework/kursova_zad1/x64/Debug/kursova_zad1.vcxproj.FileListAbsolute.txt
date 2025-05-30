@@ -1,0 +1,3 @@
+C:\Users\Linko\Desktop\University\Bakalavur\I kurs\I semestur\Programming\console apps\C\kursova_zad1\x64\Debug\kursova_zad1.exe
+C:\Users\Linko\Desktop\kursova_zad1\x64\Debug\kursova_zad1.exe
+C:\Users\Linko\Desktop\University\Bakalavur\I kurs\I semestur\Programming\console_apps\C\kursova_zad1\x64\Debug\kursova_zad1.exe

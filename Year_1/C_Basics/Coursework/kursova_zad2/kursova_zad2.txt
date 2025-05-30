@@ -1,0 +1,144 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct STUDENT
+{
+	char ime[41];
+	char EGN[11];
+	char FN[7];
+	int ocenki[10];
+	float sr_uspeh;
+};
+
+FILE* fp;
+char imefl[31];
+STUDENT student;
+
+//въвеждане
+void ReadStud(STUDENT* st)
+{
+	printf_s("\nВъведете име: ");
+	gets_s(st->ime);
+	printf_s("Въведете ЕГН: ");
+	gets_s(st->EGN);
+	printf_s("Въведете факултетен номер: ");
+	gets_s(st->FN);
+	printf_s("Въведете оценките по 10 дисциплини:\n");
+	for (int i = 0; i < 10; i++) {
+		printf_s("Дисциплина %d: ", i + 1);
+		scanf_s("%d", &st->ocenki[i]); getchar();
+	}
+}
+
+//извеждане
+void WriteStud(STUDENT st)
+{
+	printf_s("\nИме: %s\nЕГН: %s\nФакултетен номер: %s\n", st.ime, st.EGN, st.FN);
+	printf_s("Оценки:");
+	for (int i = 0; i < 10; i++) {
+		printf_s("%3d", st.ocenki[i]);
+	}
+}
+
+//създаване на файл
+void CreateFL()
+{
+	fp = fopen(imefl, "w"); fclose(fp);
+	printf_s("\nФайлът е създаден!\n");
+}
+
+//добавяне на информация към файла
+void AddFL()
+{
+	fp = fopen(imefl, "a+b");
+	char ch;
+	do {
+		ReadStud(&student);
+		fwrite(&student, sizeof(student), 1, fp);
+		WriteStud(student);
+		printf_s("\n\nЩе продължите ли въвеждането (d/n)? ");
+		ch = getchar(); getchar();
+	} while (ch != 'n');
+	fclose(fp);
+}
+
+//изчисляване на среден успех
+void CalcAverage()
+{
+	fp = fopen(imefl, "rb");
+	fread(&student, sizeof(student), 1, fp);
+
+	while (!feof(fp)) {
+		float sum_oc = 0;
+		int br_oc = 0;
+
+		for (int i = 0; i < 10; i++) {
+			sum_oc += student.ocenki[i];
+			if (student.ocenki[i] != 0) {
+				br_oc++;
+			}
+		}
+		student.sr_uspeh = sum_oc / br_oc;
+		printf_s("\nСреден успех за %s (%s): %0.2f", student.ime, student.FN, student.sr_uspeh);
+		fread(&student, sizeof(student), 1, fp);
+	}
+	printf_s("\n");
+	fclose(fp);
+}
+
+//списък
+void ListFN()
+{
+	fp = fopen(imefl, "rb");
+	fread(&student, sizeof(student), 1, fp);
+	printf_s("\nСписък от факултетните номера с не повече от две двойки:");
+
+	while (!feof(fp)) {
+
+		int br_dvoiki = 0;
+
+		for (int i = 0; i < 10; i++) {
+			if (student.ocenki[i] == 2) {
+				br_dvoiki++;
+			}
+		}
+		if (br_dvoiki <= 2) {
+			printf_s("\n%s", student.FN);
+		}
+		fread(&student, sizeof(student), 1, fp);
+	}
+	printf_s("\n");
+	fclose(fp);
+}
+
+void main()
+{
+	system("chcp 1251");
+
+	char izbor[3];
+	printf_s("\nЗадайте име на файл: "); gets_s(imefl);
+	do {
+		printf_s("\n===МЕНЮ===\n");
+		printf_s("1. Създаване на празен файл.\n");
+		printf_s("2. Добавяне на информация за студент.\n");
+		printf_s("3. Изчисляване на среден успех.\n");
+		printf_s("4. Създаване на списък от факултетните номера с не повече от две двойки.\n");
+		printf_s("0. Край на програмата.\n");
+		gets_s(izbor);
+
+		switch (izbor[0]) {
+		case '1': CreateFL(); break;
+		case '2': AddFL(); break;
+		case '3': CalcAverage(); break;
+		case '4': ListFN(); break;
+		case '0': printf_s("Край.\n"); break;
+		default: printf_s("\nНевалиден избор!\n");
+		}
+	}
+	while (izbor[0] != '0');
+
+	system("pause");
+}

@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void main() {
+	system("chcp 1251");
+
+	int A[10][20], B[10];
+	int m, n, i, j;
+
+	printf_s("\nВъведете брой редове: "); scanf_s("%d", &m);
+	printf_s("Въведете брой стълбове: "); scanf_s("%d", &n);
+
+	printf_s("\nВъведете елементите на двумерния масив A[%d][%d]:\n", m, n);
+	for (i = 0; i < m; i++) {
+		for (j = 0; j < n; j++) {
+			scanf_s("%d", &A[i][j]);
+		}
+	}
+
+	for (j = 0; j < n; j++) {
+		int max_otr = -1; //най-голяма отрицателна стойност
+		int max_otr_index = -1; //индекс на най-голямата отрицателна стойност
+
+		for (i = 0; i < m; i++) {
+			if (A[i][j] < 0) {
+				if (A[i][j] > max_otr || max_otr_index == -1) {
+					max_otr = A[i][j];
+					max_otr_index = i;
+				}
+			}
+
+		}
+		B[j] = max_otr_index;
+	}
+
+	for (j = 0; j < n; j++) {
+		if (B[j] != -1) { //проверка за отрицателни стойности
+			printf_s("Индексът на най-голямата отрицателна стойност в стълб %d е: %d\n", j, B[j]);
+		}
+		else {
+			printf_s("Няма отрицателни стойности в стълб %d\n", j);
+		}
+	}
+
+	system("pause");
+}
