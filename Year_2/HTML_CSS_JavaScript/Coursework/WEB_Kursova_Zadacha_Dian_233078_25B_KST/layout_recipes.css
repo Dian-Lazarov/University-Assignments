@@ -1,0 +1,92 @@
+#content h1 {
+	text-align: center;
+	font-weight: bold;
+	font-family: Trebuchet MS, sans-serif;
+	font-style: italic;
+	
+}
+
+#content h2 {
+	text-align: left;
+	text-indent: 44px;
+	color: green;
+	font-family: Georgia, serif;
+	font-size: 25px;
+	
+}
+
+#content li {
+	text-align: left;
+	line-height: 25px;
+}
+
+#content ul {
+	text-indent: 15px;
+	list-style-position: inside;
+}
+
+#content p {
+	text-indent: 25px;
+	text-decoration: underline;
+	font-style: italic;
+	font-weight: bold;
+	text-align: left;
+}
+
+#content img {
+	float: right;
+	margin-right: 200px;
+	height: 300px;
+}
+
+.cook {
+	text-align: justify;
+	line-height: 22px;
+	padding: auto;
+	margin: auto;
+}
+
+.products {
+	color: #e67e22;
+	font-weight: bold;
+}
+
+@media screen and (max-width: 800px) {
+    #content h1 {
+        font-size: 28px;
+    }
+	
+    #content h2 {
+        font-size: 20px;
+        text-indent: 0;
+    }
+	
+    #content p, #content li {
+        font-size: 16px;
+        line-height: 22px;
+        text-indent: 0;
+		margin-top: 0;
+		margin-right: 0;
+		margin-bottom: 15px;
+    }
+	
+    #content ul {
+        padding: 0 15px;
+    }
+	
+    #content img {
+        float: none;
+        display: block;
+        width: 450px;
+        height: auto;
+        margin: 10px auto;
+    }
+
+    .cook {
+		padding-top: 0;
+		padding-right: 20px;
+		margin-top: 0;
+		margin-right: 0;
+		margin-bottom: 20px;
+    }
+}

@@ -1,0 +1,48 @@
+.field {
+	background-color: lightgoldenrodyellow;
+	color: teal;
+	font-weight: bold;
+}
+
+#b_submit {
+	width: 150px;
+	height: 30px;
+	background-color: green;
+	color: white;
+	font-weight: bold;
+}
+
+#b_reset {
+	width: 150px;
+	height: 30px;
+	background-color: red;
+	color: white;
+	font-weight: bold;
+}
+
+@media screen and (max-width: 800px) {
+    #content form table {
+        width: 450px;
+        margin: 0;
+    }
+    #content form table tr {
+        display: block;
+        margin-bottom: 15px;
+    }
+    #content form table td {
+        display: block;
+        width: 450px;
+        padding-top: 5px;
+		padding-left: 0;
+        text-align: left;
+    }
+    #content form table td input.field, #content form table td textarea.field {
+        width: 450px;
+    }
+    #content form table td {
+        text-align: left;
+    }
+    #content form table td #b_submit, #content form table td #b_reset {
+        margin: 5px;
+    }
+}

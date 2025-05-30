@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html lang="bg">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>DidoKuhnya | Contacts</title>
+		<link href="images/favicon.ico" type="image/x-icon" rel="icon">
+		<link href="layout_global.css" type="text/css" rel="stylesheet">
+		<link href="layout_contacts.css" type="text/css" rel="stylesheet">
+		
+		<script>
+			function checkData() {
+				var name=document.getElementById("name").value.trim();
+				var facNum=document.getElementById("faculty_number").value.trim();
+				var email=document.getElementById("email").value.trim();
+				var msg=document.getElementById("message").value.trim();
+				var rad=document.getElementsByClassName("radio");
+				
+				//проверка за празни полета
+				if(name=="" || facNum=="" || email=="" || msg=="") {
+					alert("Моля, попълнете всички полета!");
+					return false;
+				}
+				
+				//проверка дали въведеният факултетен номер съдържа точно 6 цифри
+				if(facNum.length != 6) {
+					alert("Въведен е невалиден факултетен номер!")
+					return false;
+				}
+				
+				//проверка дали е избран приоритет на съобщението
+				for(var i=0; i<rad.length; i++) {
+					if(rad[0].checked==false && rad[1].checked==false && rad[2].checked==false) {
+						alert("Моля, изберете приоритет на съобщението!");
+						return false;
+					}
+					else {
+						return true;
+					}
+				}
+			}
+		</script>
+	</head>
+	
+	<body>
+		<div id="container">
+			<header>
+				<a href="index.html" id="logo"> <img src="images/hat.png" width="40" alt="hat"> DidoKuhnya </a>
+			</header>
+			
+            <div id="nav_main">
+				<ul>
+					<li><a href="index.html">Начало</a></li>
+					<li><a href="bulgarian_recipes.html">Български рецепти</a></li>
+					<li><a href="italian_recipes.html">Италиански рецепти</a></li>
+					<li><a href="contacts.html">Контакти</a></li>
+				</ul>
+			</div>
+			
+            <div id="nav_extra"><br><u>Източници:</u><br>
+				<ol type="A">
+					<li><a href="https://www.w3schools.com/" target="_blank">W3Schools</a></li>
+					<li><a href="https://www.freecodecamp.org/" target="_blank">FreeCodeCamp</a></li>
+					<li><a href="https://htmlcolorcodes.com/" target="_blank">HTMLColorCodes</a></li>
+					<li><a href="https://www.favicon.cc/" target="_blank">Favicon</a></li>
+					<li><a href="https://bg.wikipedia.org/wiki/Българска_кухня" target="_blank">Българска кухня</a></li>
+					<li><a href="https://bg.wikipedia.org/wiki/Италианска_кухня" target="_blank">Италианска кухня</a></li>
+					<li><a href="https://gotvach.bg/" target="_blank">Рецепти</a></li>
+				</ol>
+			</div>
+			
+			<div id="content" style="text-align: left;">
+				<h1>Контакти</h1> <hr>
+				
+				<form method="post" action="http://nw65-1.ecs.uni-ruse.bg/students/WebDsn/WebDsn15-8/dumprequest.php" onsubmit="return checkData();">
+					<table border="0" align="center" width="1420" cellpadding="6" cellspacing="0" class="responsive">
+						<tr>
+							<td align="right"><b>Име:</b></td>
+							<td><input type="text" placeholder="Name" autofocus="autofocus" class="field" id="name"> </td>
+						</tr>
+						
+						<tr>
+							<td align="right"><b>Факултетен номер:</b></td>
+							<td><input type="number" placeholder="Faculty Number" class="field" id="faculty_number"> </td>
+						</tr>
+						
+						<tr>
+							<td align="right"><b>Имейл:</b></td>
+							<td><input type="email" size="30" placeholder="Email" class="field" id="email"></td>
+						</tr>
+						
+						<tr>
+							<td align="right"><b>Съобщение:</b></td>
+							<td><textarea rows="10" cols="40" class="field" id="message"></textarea></td>
+						</tr>
+						
+						<tr>
+							<td align="right"><b>Приоритет на съобщението:</b></td>
+							<td>
+								<input type="radio" name="priority" value="low" size="30" class="radio">Нисък
+								<input type="radio" name="priority" value="medium" size="30" class="radio">Среден
+								<input type="radio" name="priority" value="high" size="30" class="radio">Висок
+							</td>
+						</tr>
+						
+						<tr>
+							<td colspan="2" align="center">
+								<input type="submit" value="Изпрати" id="b_submit">
+								<input type="reset" value="Изчисти" id="b_reset">
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+			<footer>© DidoKuhnya, 2025</footer>
+		</div>
+	</body>
+</html>				
