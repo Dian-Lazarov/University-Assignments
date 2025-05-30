@@ -1,0 +1,4 @@
+﻿  Source.cpp
+C:\Users\Linko\Desktop\strings_length_average\Source.cpp(44,30): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Linko\Desktop\strings_length_average\Source.cpp(51,6): warning C4326: return type of 'main' should be 'int' instead of 'void'
+  strings_length_average.vcxproj -> C:\Users\Linko\Desktop\strings_length_average\x64\Debug\strings_length_average.exe

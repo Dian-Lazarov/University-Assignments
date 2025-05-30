@@ -1,0 +1,3 @@
+﻿  SearchTreeTasks.cpp
+C:\Users\Linko\Desktop\University\Bachelor\II kurs\III semestur\SA_ALG\console apps\search_tree_tasks\SearchTreeTasks.cpp(106,6): warning C4326: return type of 'main' should be 'int' instead of 'void'
+  search_tree_tasks.vcxproj -> C:\Users\Linko\Desktop\University\Bachelor\II kurs\III semestur\SA_ALG\console apps\search_tree_tasks\x64\Debug\search_tree_tasks.exe
