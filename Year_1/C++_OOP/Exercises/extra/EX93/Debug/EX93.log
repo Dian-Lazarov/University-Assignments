@@ -1,0 +1,3 @@
+﻿  Source.cpp
+D:\Projects Visual Studio\EX93\Source.cpp(12,13): warning C4326: return type of 'main' should be 'int' instead of 'void'
+  EX93.vcxproj -> D:\Projects Visual Studio\EX93\Debug\EX93.exe

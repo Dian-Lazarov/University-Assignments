@@ -1,0 +1,5 @@
+﻿  Source.cpp
+D:\Projects Visual Studio\EX91\Source.cpp(11,13): warning C4326: return type of 'main' should be 'int' instead of 'void'
+D:\Projects Visual Studio\EX91\Source.cpp(13,16): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Projects Visual Studio\EX91\Source.cpp(13,25): warning C4305: 'initializing': truncation from 'double' to 'float'
+  EX91.vcxproj -> D:\Projects Visual Studio\EX91\x64\Debug\EX91.exe
