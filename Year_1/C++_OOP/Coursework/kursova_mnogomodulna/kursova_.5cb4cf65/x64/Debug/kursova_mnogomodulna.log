@@ -1,0 +1,15 @@
+﻿  car.cpp
+  exotic.cpp
+  hypercar.cpp
+  luxury.cpp
+  main.cpp
+  motorcycle.cpp
+C:\Users\Linko\Desktop\University\Bachelor\I kurs\II semestur\OOP\console apps\C++\kursova_mnogomodulna\main.cpp(18,6): warning C4326: return type of 'main' should be 'int' instead of 'void'
+C:\Users\Linko\Desktop\University\Bachelor\I kurs\II semestur\OOP\console apps\C++\kursova_mnogomodulna\main.cpp(37,23): warning C4305: 'argument': truncation from 'double' to 'float'
+  performance.cpp
+  sports.cpp
+  supercar.cpp
+  truck.cpp
+  vehicle.cpp
+  Generating Code...
+  kursova_mnogomodulna.vcxproj -> C:\Users\Linko\Desktop\University\Bachelor\I kurs\II semestur\OOP\console apps\C++\kursova_mnogomodulna\x64\Debug\kursova_mnogomodulna.exe
