@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Задача 5 - Тест по уеб дизайн </title>
+<style type="text/css">
+	
+	body {
+		font-family: Verdana, Arial;
+		font-size: 14px;
+	}
+	
+	.tf {
+		border: 1px solid #707070;
+		font-size: 14px;
+		margin: 2px;
+	}
+	
+	.center {
+		text-align: center;
+	}
+			
+	.bold {
+		font-weight: bold;
+	}
+	
+	.title {
+		font-weight: bold;
+		padding: 3px 0px;
+		border-bottom: 1px solid black;
+	}
+	
+	.question {
+		padding-top: 10px;
+	}
+	
+</style>
+
+<script type="text/javascript">
+function checkAndGrade() {
+	let points = 0;
+
+	// Question 1
+	const q1Correct = 
+		document.getElementById("div").checked &&
+		document.getElementById("li").checked &&
+		document.getElementById("p").checked &&
+		!document.getElementById("a").checked &&
+		!document.getElementById("img").checked;
+	if (q1Correct) points += 5;
+
+	// Question 2
+	const q2Answer = document.test.bgc.value;
+	if (q2Answer === "background-color") points += 5;
+
+	// Question 3
+	const q3Answer = document.getElementById("halign").value.trim().toLowerCase();
+	if (q3Answer === "text-align") points += 5;
+
+	// Question 4
+	const q4Answer = document.test.http.value;
+	if (q4Answer === "false") points += 5;
+
+	// Question 5
+	const q5Correct = 
+		document.getElementById("static").checked &&
+		document.getElementById("relative").checked &&
+		!document.getElementById("top").checked &&
+		!document.getElementById("bottom").checked;
+	if (q5Correct) points += 5;
+
+	// Determine grade
+	let grade;
+	if (points === 25) grade = 6;
+	else if (points === 20) grade = 5;
+	else if (points === 15) grade = 4;
+	else if (points === 10) grade = 3;
+	else grade = 2;
+
+	alert("Брой точки: " + points + "\nОценка: " + grade);
+}
+</script>
+
+</head>
+
+<body>
+	<p>
+		<span class="title">Тест по уеб дизайн</span>
+	</p>
+	<form name="test">	
+	<table border="0">
+		<tr>
+			<td colspan="2" class="question">1. Кои от следните тагове са блокови по подразбиране?</td>
+		</tr>
+		<tr>
+			<td> <input type="checkbox" name="a" id="a"> &lt;a&gt; 
+					<br> <input type="checkbox" name="div" id="div"> &lt;div&gt;
+					<br> <input type="checkbox" name="li" id="li"> &lt;li&gt;
+			</td>
+			<td> <input type="checkbox" name="p" id="p"> &lt;p&gt; 
+					<br> <input type="checkbox" name="img" id="img"> &lt;img&gt;
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="2" class="question">2. С кое от следните CSS свойства се задава цвят на фона?</td>
+		</tr>
+		<tr>
+			<td> <input type="radio" name="bgc" value="line-color" id="line-color"> line-color 
+					<br> <input type="radio" name="bgc" value="background-color" id="background-color"> background-color
+			</td>
+			<td> <input type="radio" name="bgc" value="color" id="color"> color 
+					<br> <input type="radio" name="bgc" value="background-image" id="background-image"> background-image
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="2" class="question">3. С кое CSS свойство се подравнява текстът по хоризонтала?</td>
+		</tr>
+		<tr>
+			<td colspan="2"> <input type="text" name="halign" id="halign" size="20" class="tf"> </td>
+		</tr>
+
+		<tr>
+			<td colspan="2" class="question">4. HTTP е език за програмиране от свръх високо ниво.</td>
+		</tr>
+		<tr>
+			<td colspan="2"> Твърдението е 
+				<select name="http" class="tf">
+					<option value="true">вярно</option>
+					<option value="false">невярно</option>
+					<option value="ok">'ми звучи ОК</option>
+				</select>
+			</td>
+		</tr>	
+		
+		<tr>
+			<td colspan="2" class="question">5. Кои от следните са валидни стойности на свойството position?</td>
+		</tr>
+		<tr>
+			<td> <input type="checkbox" name="static" id="static"> static 
+					<br> <input type="checkbox" name="top" id="top"> top
+			</td>
+			<td> <input type="checkbox" name="bottom" id="bottom"> bottom 
+					<br> <input type="checkbox" name="relative" id="relative"> relative
+			</td>
+		</tr>	
+		<tr>
+			<td colspan="2" class="question"><input type="button" value="Провери и оцени" onclick="checkAndGrade();"></td>
+		</tr>
+	
+	</table>
+	</form>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Задача 5 - Отбележете местата, които сте посетили</title>
+<style type="text/css">
+
+	div {
+		width:1000px;
+		margin: 0px auto;
+		font-family: Verdana, Arial;
+		font-size: 14px;
+		text-align:center;
+	}
+	
+	#content {
+		height: 820px;
+		background-image:url('map.png');
+		background-position:center;
+		background-repeat:no-repeat;
+		border: 1px solid black;
+	}
+	
+	#title {
+		font-weight: bold;
+		padding: 3px 0px;
+		border-bottom: 1px solid black;
+	}
+	
+	#help {
+		padding: 3px;
+	}
+	
+	
+</style>
+
+<script type="text/javascript">
+
+function insertPin(eventObject) {
+	if (!eventObject){
+		var eventObject = window.event;
+	}
+	
+	var x = eventObject.clientX; // x координатата на курсора
+	var y = eventObject.clientY; // у координатата на курсора
+	document.getElementById('content').innerHTML+='<img src="pin.png" style="position:absolute;top:'+(y-32+window.pageYOffset)+'px; left:'+(x-10+window.pageXOffset)+'px">';
+}
+
+
+</script>
+
+</head>
+
+<body>
+	<div id="title">Отбележете местата, които сте посетили</div>
+	<div id="help">За да отбележите дадено място, просто кликнете върху него. Мястото ще бъде отбелязано с <img src="pin.png"></div>
+	<div id="content" onclick="insertPin(event);"></div>
+</body>
+</html>

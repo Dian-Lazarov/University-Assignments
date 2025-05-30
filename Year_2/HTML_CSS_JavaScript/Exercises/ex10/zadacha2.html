@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Задача 2 - JavaScript калкулатор</title>
+<style type="text/css">
+	
+	body {
+		font-family: Verdana, Arial;
+		font-size: 14px;
+	}
+	
+	.tf {
+		border: 1px solid #707070;
+		font-size: 15px;
+		font-weight: bold;
+	}
+	
+	td {
+		vertical-align:top;
+		text-align: center;
+	}
+	
+	.bold {
+		font-weight: bold;
+	}
+	
+	.title {
+		font-weight: bold;
+		padding: 3px 0px;
+		border-bottom: 1px solid black;
+	}
+	
+</style>
+
+<script type="text/javascript">
+	function calculate() {
+		var form = document.forms["calc"];
+		var op1 = parseFloat(form["op1"].value);
+		var op2 = parseFloat(form["op2"].value);
+		var operator = form["operator"].value;
+		var result = "";
+
+		if (isNaN(op1) || isNaN(op2)) {
+			result = "Невалидни числа!";
+		} else if (operator === "sum") {
+			result = op1 + op2;
+		} else if (operator === "sub") {
+			result = op1 - op2;
+		} else if (operator === "mul") {
+			result = op1 * op2;
+		} else if (operator === "div") {
+			if (op2 !== 0) {
+				result = op1 / op2;
+			} else {
+				result = "Деление на 0!";
+			}
+		} else {
+			result = "Изберете оператор!";
+		}
+
+		form["result"].value = result;
+	}
+</script>
+
+</head>
+
+<body>
+	<p>
+		<span class="title">JavaScript калкулатор</span>
+	</p>
+	<table border="0" width="400">
+		<tr>
+			<td>Операнд 1</td>
+			<td>Оператор</td>
+			<td>Операнд 2</td>
+			<td><span class="bold">Резултат</span></td>
+		</tr>
+		<form name="calc">
+		<tr>
+			<td><input class="tf" type="text" name="op1" size="7"></td>
+			<td rowspan="2"><input type="radio" name="operator" value="sum"> + 
+					<br><input type="radio" name="operator" value="sub"> - 
+					<br><input type="radio" name="operator" value="mul"> *
+					<br><input type="radio" name="operator" value="div"> /  
+			</td>
+			<td><input class="tf" type="text" name="op2" size="7"></td>
+			<td><input class="tf" type="text" name="result" size="10"></td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td><input type="button" value="Изчисли" onclick="calculate();"></td>
+		</tr>
+	</form>
+	</table>
+
+</body>
+</html>

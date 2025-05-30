@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Задача 1 - Моят първи JavaScript код</title>
+<style type="text/css">
+	
+	body {
+		font-family: Verdana, Arial;
+		font-size: 14px;
+	}
+	
+	input {
+		margin: 5px;
+	}
+	
+	.tf {
+		border: 1px solid #707070;
+		font-size: 15px;
+		font-weight: bold;
+	}
+	
+	.title {
+		font-weight: bold;
+		padding: 3px 0px;
+		border-bottom: 1px solid black;
+	}
+	
+</style>
+<script type="text/JavaScript">
+	function showMessage() {
+      alert("Hello Universe!");
+    }
+	
+	function showText() {
+	var inputText = document.forms["myform"].elements["txt1"].value;
+	alert(inputText);
+	}
+</script>
+</head>
+
+<body>
+	<p>
+		<span class="title">Моят първи JavaScript код</span>
+	</p>
+	
+	<form name="myform">
+		<p>	
+			<input class="tf" type="text" name="txt1" size="20">
+			<br><input type="button" value="Кликни ме!" onclick="showText();"> 
+		</p>
+	</form>
+	
+</body>
+</html>

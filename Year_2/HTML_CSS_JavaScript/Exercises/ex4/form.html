@@ -1,0 +1,77 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Form</title>
+</head>
+
+<body>
+<form method="get" action="http://nw65-1.ecs.uni-ruse.bg/students/WebDsn/WebDsn15-8/dumprequest.php">
+<table border="0" align="center" width="600" cellpadding="5" cellspacing="0" bgcolor="#FFDDAA">
+
+<tr>
+	<td align="right">Име: </td>
+	<td><input type="text" name="ime" maxlength="35" placeholder="First Name" required="required" autofocus="autofocus"> </td>
+</tr>	
+<tr>
+	<td align="right">Фамилия: </td>
+	<td><input type="text" name="fam" maxlength="40" placeholder="Last Name" required="required"> </td>
+</tr>
+<tr>
+	<td align="right">Пол: </td>
+	<td><input type="radio" name="pol" value="f" size="30" checked>Жена <input type="radio" name="pol" value="m" size="30">Мъж </td>
+</tr>
+<tr>
+	<td align="right">Имейл: </td>
+	<td><input type="email" name="poshta" value="" size="40" maxlength="25" placeholder="Email" required="required"></td>
+</tr>
+
+<tr>
+	<td align="right">Съобщение: </td>
+	<td><textarea rows="5" cols="32" maxlength="5000" required="required"> </textarea></td>
+</tr>
+
+<tr>
+	<td align="right">Държава: </td>
+	<td><select name="country">
+	<option value="1">България</option>
+	<option value="2">Русия</option>
+	<option value="3">САЩ</option>
+	<option value="4">Германия</option>
+	</select>
+	</td>
+</tr>
+
+<tr>
+	<td align="right">Професионални интереси: </td>
+	<td>
+	<input type="checkbox" name="al" value="1" checked>Алгоритми и структури от данни <br>
+	<input type="checkbox" name="bd" value="2">Бази от данни <br>
+	<input type="checkbox" name="web1" value="3">Уеб програмиране <br>
+	<input type="checkbox" name="web3" value="5" checked>Уеб услуги и разпределени уеб приложения <br>
+	<input type="checkbox" name="is" value="6">Информационни системи <br>
+	<input type="checkbox" name="search" value="7">Търсене и извличане на информация <br>
+	</td>
+</tr>
+
+<tr>
+	<td align="right">Потребителско име: </td>
+	<td><input type="text" name="user" maxlength="20" minlength="5" placeholder="Username" required="required" autocomplete="off"></td>
+</tr>
+
+<tr>
+	<td align="right">Парола: </td>
+	<td><input type="password" name="pass" maxlength="50" minlength="8" placeholder="Password" required="required"></td>
+</tr>
+
+<tr>
+	<td colspan="2" align="center">
+	<input type="submit" value="Регистрирай">
+	<input type="reset" value="Изчисти">
+	<input type="button" value="Откажи">
+	</td>
+</tr>
+</table>
+</form>
+
+</body>
+</html>

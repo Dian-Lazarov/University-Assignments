@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Задача 2 - Отварящо се меню </title>
+<style type="text/css">
+	
+	body {
+		font-family: Verdana, Arial;
+		font-size: 14px;
+	}
+	
+	
+	#content {
+		width:800px;
+		margin: 0px auto;
+		text-align:justify;
+	}
+	
+	#title {
+		width:125px;
+		font-weight: bold;
+		padding: 3px 0px;
+		border-bottom: 1px solid black;
+		text-align:center;
+	}
+	
+	.menuitem {
+		width:125px;
+		padding:3px 5px;
+		border-bottom: 2px solid black;
+		background-color:#FFCC66;
+	}
+	
+	.submenu:link, .submenu:visited {
+		color: navy;
+		text-decoration: none;
+	}
+	
+	.submenu:hover, .submenu:active {
+		color: #EE0000;
+		text-decoration: underline;
+		font-weight:bold;
+	}
+	
+</style>
+
+<script type="text/javascript">
+function toggleMenuItem(subGroupId) {
+    const submenu = document.getElementById(subGroupId);
+    if (submenu.style.display === "none") {
+        submenu.style.display = "block";
+    } else {
+        submenu.style.display = "none";
+    }
+}
+	
+function toggleAllMenus() {
+    var buttonText = document.getElementById('toggleAllBtn').innerHTML;
+    var subGroups = document.getElementById('content').getElementsByTagName('div');
+
+    if (buttonText === 'Отвори всички') {
+        for (var i = 0; i < subGroups.length; i++) {
+            subGroups[i].style.display = 'block';
+        }
+        document.getElementById('toggleAllBtn').innerHTML = 'Затвори всички';
+    } else {
+        for (var i = 0; i < subGroups.length; i++) {
+            subGroups[i].style.display = 'none';
+        }
+        document.getElementById('toggleAllBtn').innerHTML = 'Отвори всички';
+    }
+}
+</script>
+
+</head>
+
+<body>
+	<div id="content">
+		<p id="title">Компютърни <br>компоненти</p>
+		<button id="toggleAllBtn" onclick="toggleAllMenus()">Отвори всички</button>
+		<p id="item1" class="menuitem" onclick="toggleMenuItem('subgroup1');">Процесори</p>	
+			<div id="subgroup1" style="display:none;">
+				&nbsp;&nbsp; + <a href="#" class="submenu">Intel</a> <br>
+				&nbsp;&nbsp; + <a href="#" class="submenu">AMD</a> <br>
+				&nbsp;&nbsp; + <a href="#" class="submenu">ARM</a> <br>
+				&nbsp;&nbsp; + <a href="#" class="submenu">nVidia</a>
+			</div>
+			
+		<p id="item2" class="menuitem" onclick="toggleMenuItem('subgroup2');">Дънни платки</p>	
+			<div id="subgroup2" style="display:none;">
+				&nbsp;&nbsp; + <a href="#" class="submenu">Asus</a> <br>
+				&nbsp;&nbsp; + <a href="#" class="submenu">Asrock</a> <br>
+				&nbsp;&nbsp; + <a href="#" class="submenu">Foxconn</a> <br>
+				&nbsp;&nbsp; + <a href="#" class="submenu">Gigabyte</a>
+			</div>	
+
+		<p id="item3" class="menuitem" onclick="toggleMenuItem('subgroup3');">Памет</p>	
+			<div id="subgroup3" style="display:none;">
+				&nbsp;&nbsp; + <a href="#" class="submenu">Samsung</a> <br>
+				&nbsp;&nbsp; + <a href="#" class="submenu">A-Data</a> <br>
+				&nbsp;&nbsp; + <a href="#" class="submenu">Corsair</a> <br>
+				&nbsp;&nbsp; + <a href="#" class="submenu">Kingston</a>
+			</div>	
+			
+		<p id="item4" class="menuitem" onclick="toggleMenuItem('subgroup4');">Твърди дискове</p>	
+			<div id="subgroup4" style="display:none;">
+				&nbsp;&nbsp; + <a href="#" class="submenu">Western Digital</a> <br>
+				&nbsp;&nbsp; + <a href="#" class="submenu">Seagate</a> <br>
+				&nbsp;&nbsp; + <a href="#" class="submenu">Toshiba</a> <br>
+				&nbsp;&nbsp; + <a href="#" class="submenu">Hitachi</a>
+			</div>	
+				
+	</div>
+</body>
+</html>

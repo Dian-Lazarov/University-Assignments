@@ -1,0 +1,19 @@
+﻿div p {
+	color:green;
+}
+
+div+div p {
+	color:fuchsia;
+}
+
+div h3+p{
+	color:red;
+}
+
+div p+h3 {
+	color:teal;
+}
+
+p>em {
+	color:blue
+}

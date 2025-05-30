@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Задача 3 - Проверка на данни </title>
+<style type="text/css">
+	
+	body {
+		font-family: Verdana, Arial;
+		font-size: 14px;
+	}
+	
+	.tf {
+		border: 1px solid #707070;
+		font-size: 14px;
+		margin: 2px;
+	}
+	
+	.center {
+		text-align: center;
+	}
+		
+	.leftCol {
+		text-align: right;
+	}
+	
+	.bold {
+		font-weight: bold;
+	}
+	
+	.title {
+		font-weight: bold;
+		padding: 3px 0px;
+		border-bottom: 1px solid black;
+	}
+	
+</style>
+
+<script type="text/javascript">
+function checkData() {
+	const email = document.getElementById("email").value.trim();
+	const pwd1 = document.getElementById("pwd1").value.trim();
+	const pwd2 = document.getElementById("pwd2").value.trim();
+	const agreeBox = document.getElementById("agree");
+
+	if (email === "" || pwd1 === "" || pwd2 === "") {
+		alert("Моля, попълнете всички полета!");
+		return false;
+	}
+
+	if (pwd1 !== pwd2) {
+		alert("Паролите не съвпадат!");
+		return false;
+	}
+
+	if (!agreeBox.checked) {
+		const response = confirm("Съгласявате ли се с общите условия?");
+		if (response) {
+			agreeBox.checked = true;
+			alert("Въведени са коректни данни! Следва прехвърляне към сървъра за по-нататъшна обработка.");
+			return true;
+		} else {
+			alert("Не можете да се регистрирате без съгласие с общите условия.");
+			return false;
+		}
+	}
+
+	alert("Въведени са коректни данни! Следва прехвърляне към сървъра за по-нататъшна обработка.");
+	return true;
+}
+</script>
+
+
+</head>
+
+<body>
+	<p>
+		<span class="title">Проверка на данни от формуляр</span>
+	</p>
+	<form name="profile" method="post" action="http://nw65-1.ecs.uni-ruse.bg/students/WebDsn/WebDsn15-8/dumprequest.php" onsubmit="return checkData();">	
+	<table border="0">
+		<tr>
+			<td class="leftCol">Email:</td>
+			<td><input class="tf" type="text" name="email" id="email" size="20"></td>
+		</tr>
+		<tr>
+			<td class="leftCol">Парола:</td>
+			<td><input class="tf" type="password" name="pwd1" id="pwd1" size="15"></td>
+		</tr>
+		<tr>
+			<td class="leftCol">Потвърдете <br>паролата:</td>
+			<td><input class="tf" type="password" name="pwd2" id="pwd2" size="15"></td>
+		</tr>
+		<tr>
+			<td colspan="2"><input type="checkbox" name="agree" id="agree" value="y"> Съгласен съм с общите условия</td>
+		</tr>		
+		<tr>
+			<td colspan="2" class="center"><input type="submit" value="Регистрирай"></td>
+		</tr>				
+	</table>
+	</form>
+</body>
+</html>

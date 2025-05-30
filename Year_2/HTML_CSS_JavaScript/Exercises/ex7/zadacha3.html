@@ -1,0 +1,47 @@
+<html>
+   <head>
+   	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Задача 3 - галерия ...</title>
+    <style type="text/css">
+
+ 			.thumb span{ 
+				position: absolute;
+				visibility: hidden;
+			}
+						
+			.thumb img {
+				border: 0px;
+			}
+			
+			.thumb:hover span{ 
+				position: absolute;
+				visibility: visible;
+			}
+			.thumb:hover>img {
+				border: 1px solid black;
+			}
+
+
+    </style>
+   </head>
+   
+   <body> 
+   	<div id="gallery">
+			<a class="thumb" href="#">
+				<img src="im1.jpg" height="80px" alt="">
+				<span><img src="im1.jpg" alt="original image"></span>
+			</a>
+			<br>
+			<a class="thumb" href="#">
+				<img src="im2.jpg" height="80px" alt="">
+				<span><img src="im2.jpg" alt="original image"></span>
+			</a>
+			<br>
+			<a class="thumb" href="#">
+				<img src="im3.jpg" height="80px" alt="">
+				<span><img src="im3.jpg" alt="original image"></span>
+			</a> 
+		</div>
+
+   </body>
+</html>
