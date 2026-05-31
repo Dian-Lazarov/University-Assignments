@@ -1,0 +1,11 @@
+MOV AL, 2F
+MOV BL, 3D
+
+ADD AL, BL
+
+MOV [30], AL
+
+LOOP:
+JMP LOOP
+
+END
