@@ -1,0 +1,4 @@
+	MOV AL, 5A
+	MOV BL, 3C
+	ADD AL,BL
+	END
