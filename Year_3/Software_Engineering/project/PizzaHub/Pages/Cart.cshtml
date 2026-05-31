@@ -1,0 +1,261 @@
+﻿@page
+@model PizzaHub.Pages.CartModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Количка";
+}
+
+<div class="container py-5">
+    <h2 class="mb-4">Моята количка</h2>
+
+    <!-- Empty Cart Message -->
+    <div id="emptyCartMessage" class="text-center py-5" style="display: none;">
+        <h4 class="mb-3">Вашата количка е празна</h4>
+        <p class="text-muted mb-4">Добавете продукти, за да започнете пазаруването</p>
+        <a href="/" class="btn btn-primary">Разгледайте менюто</a>
+    </div>
+
+    <!-- Cart Items -->
+    <div id="cartItems" class="row">
+        <div class="col-lg-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Продукти в количката</h5>
+                    <div id="cartItemsList">
+                        <!-- Cart items will be dynamically inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Обобщение на поръчката</h5>
+                    
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Междинна сума:</span>
+                        <span id="subtotal">0.00 лв</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Доставка:</span>
+                        <span id="delivery">2.00 лв</span>
+                    </div>
+
+                    <hr>
+
+                    <div class="d-flex justify-content-between mb-4">
+                        <strong>Обща сума:</strong>
+                        <strong id="totalPrice" class="text-danger" style="font-size: 20px;">0.00 лв</strong>
+                    </div>
+
+                    <button class="btn btn-success w-100 mb-2" id="checkoutBtn">
+                        <i class="fas fa-check-circle"></i> Завършване на поръчката
+                    </button>
+
+                    <a href="/" class="btn btn-outline-secondary w-100">
+                        <i class="fas fa-arrow-left"></i> Продължи пазаруването
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .cart-item {
+        border-bottom: 1px solid #e0e0e0;
+        padding: 20px 0;
+    }
+
+    .cart-item:last-child {
+        border-bottom: none;
+    }
+
+    .cart-item-image {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 8px;
+        background-color: #f8f9fa;
+    }
+
+    .cart-item-placeholder {
+        width: 100px;
+        height: 100px;
+        border-radius: 8px;
+        background-color: #f8f9fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cart-item-placeholder i {
+        font-size: 40px;
+        color: #ddd;
+    }
+
+    .quantity-control {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .quantity-btn {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #ddd;
+        background-color: white;
+        cursor: pointer;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+    }
+
+    .quantity-btn:hover {
+        background-color: #f0f0f0;
+    }
+
+    .quantity-input {
+        width: 50px;
+        text-align: center;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 5px;
+    }
+
+    .remove-btn {
+        color: #dc3545;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .remove-btn:hover {
+        text-decoration: underline;
+    }
+</style>
+
+@section Scripts {
+    <script>
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCart();
+            updateCartTotal();
+        });
+
+        function renderCart() {
+            const cartItemsList = document.getElementById('cartItemsList');
+            const emptyCartMessage = document.getElementById('emptyCartMessage');
+            const cartItems = document.getElementById('cartItems');
+
+            if (cart.length === 0) {
+                emptyCartMessage.style.display = 'block';
+                cartItems.style.display = 'none';
+                return;
+            }
+
+            emptyCartMessage.style.display = 'none';
+            cartItems.style.display = 'flex';
+
+            cartItemsList.innerHTML = cart.map((item, index) => {
+                let imageHTML;
+                if (item.image) {
+                    imageHTML = `<img src="${item.image}" alt="${item.name}" class="cart-item-image">`;
+                } else {
+                    imageHTML = `<div class="cart-item-placeholder"><i class="fas fa-image"></i></div>`;
+                }
+
+                return `
+                <div class="cart-item" data-index="${index}">
+                    <div class="row align-items-center">
+                        <div class="col-md-2">
+                            ${imageHTML}
+                        </div>
+                        <div class="col-md-4">
+                            <h6 class="mb-1">${item.name}</h6>
+                            <small class="text-muted">${item.description || ''}</small>
+                        </div>
+                        <div class="col-md-2">
+                            <strong>${item.price.toFixed(2)} лв</strong>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="quantity-control">
+                                <button class="quantity-btn" onclick="decreaseQuantity(${index})">-</button>
+                                <input type="number" class="quantity-input" value="${item.quantity}" min="1" readonly>
+                                <button class="quantity-btn" onclick="increaseQuantity(${index})">+</button>
+                            </div>
+                        </div>
+                        <div class="col-md-1 text-end">
+                            <a class="remove-btn" onclick="removeItem(${index})">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `}).join('');
+        }
+
+        function increaseQuantity(index) {
+            cart[index].quantity++;
+            saveCart();
+            renderCart();
+            updateCartTotal();
+            updateCartBadge();
+        }
+
+        function decreaseQuantity(index) {
+            if (cart[index].quantity > 1) {
+                cart[index].quantity--;
+                saveCart();
+                renderCart();
+                updateCartTotal();
+                updateCartBadge();
+            }
+        }
+
+        function removeItem(index) {
+            if (confirm('Сигурни ли сте, че искате да премахнете този продукт от количката?')) {
+                cart.splice(index, 1);
+                saveCart();
+                renderCart();
+                updateCartTotal();
+                updateCartBadge();
+            }
+        }
+
+        function updateCartTotal() {
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const delivery = cart.length > 0 ? 2.00 : 0;
+            const total = subtotal + delivery;
+
+            document.getElementById('subtotal').textContent = subtotal.toFixed(2) + ' лв';
+            document.getElementById('delivery').textContent = delivery.toFixed(2) + ' лв';
+            document.getElementById('totalPrice').textContent = total.toFixed(2) + ' лв';
+        }
+
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        function updateCartBadge() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const badge = document.querySelector('.navbar .badge');
+            if (badge) {
+                badge.textContent = totalItems;
+            }
+        }
+
+        document.getElementById('checkoutBtn').addEventListener('click', function() {
+            if (cart.length === 0) {
+                alert('Вашата количка е празна!');
+                return;
+            }
+            alert('В процес на разработка!');
+        });
+    </script>
+}

@@ -1,0 +1,181 @@
+﻿@page
+@model PizzaHub.Pages.SearchModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Резултати от търсене";
+}
+
+<div class="container py-5">
+    <div class="mb-4">
+        <h2>Резултати от търсене</h2>
+        <p class="text-muted" id="searchQuery"></p>
+    </div>
+
+    <!-- No Results Message -->
+    <div id="noResultsMessage" class="text-center py-5" style="display: none;">
+        <i class="fas fa-search" style="font-size: 80px; color: #ddd; margin-bottom: 20px;"></i>
+        <h4 class="mb-3">Няма намерени резултати</h4>
+        <p class="text-muted mb-4">Опитайте с различна дума или фраза</p>
+        <a href="/" class="btn btn-primary">Разгледайте менюто</a>
+    </div>
+
+    <!-- Search Results Grid -->
+    <div id="searchResultsGrid" class="row g-4">
+        <!-- Search results will be dynamically inserted here -->
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        console.log('Search page loaded');
+
+        // All products database
+        const allProducts = [
+            // Pizzas
+            { name: 'Асорти', price: 12.99, description: 'Класическа пица', image: '/images/pizzas/asorti.png', category: 'Пици' },
+            { name: 'Атина', price: 14.99, description: 'Пица Атина', image: '/images/pizzas/atina.png', category: 'Пици' },
+            { name: 'Камен пица', price: 16.99, description: 'Камен пица', image: '/images/pizzas/kamen.png', category: 'Пици' },
+            { name: 'Капричоза', price: 13.99, description: 'Пица Капричоза', image: '/images/pizzas/kaprichoza.png', category: 'Пици' },
+            { name: 'Морска пица', price: 15.99, description: 'Морска пица', image: '/images/pizzas/morska.png', category: 'Пици' },
+            { name: 'Рене', price: 14.99, description: 'Пица Рене', image: '/images/pizzas/rene.png', category: 'Пици' },
+            
+            // Dishes
+            { name: 'Хрупкави пилешки филета с корнфлейкс и чеснов сос', price: 11.99, description: 'Пилешко ястие', image: '/images/dishes/hapki.png', category: 'Ястия' },
+            { name: 'Пилешки крилца', price: 9.99, description: 'Пилешко ястие', image: '/images/dishes/krilca.png', category: 'Ястия' },
+            { name: 'Ориз със зеленцуци', price: 10.99, description: 'Вегетарианско ястие', image: '/images/dishes/rice.png', category: 'Ястия' },
+            
+            // Drinks
+            { name: 'Минерална вода – 500 мл', price: 2.49, description: 'Минерална вода', image: '/images/drinks/mineralna.png', category: 'Напитки' },
+            { name: 'Каменица – 500 мл', price: 2.99, description: 'Бира', image: '/images/drinks/kamenitsa.png', category: 'Напитки' },
+            { name: 'Фанта – 500 мл', price: 3.99, description: 'Безалкохолна напитка', image: '/images/drinks/fanta.png', category: 'Напитки' },
+            
+            // Desserts
+            { name: 'Шоколадова пица', price: 6.99, description: 'Десерт', image: '/images/desserts/shokoladova_pica.png', category: 'Десерти' },
+            { name: 'Бишкотена торта', price: 5.99, description: 'Десерт', image: '/images/desserts/bishkotena_torta.png', category: 'Десерти' },
+            { name: 'Сладоледени еклери', price: 5.49, description: 'Десерт', image: '/images/desserts/sladoledeni_ekleri.png', category: 'Десерти' }
+        ];
+
+        console.log('Products database loaded:', allProducts.length, 'products');
+
+        let searchResults = [];
+
+        // Initialize search on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM Content Loaded');
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('q');
+            
+            console.log('Search query from URL:', query);
+            
+            if (query) {
+                performSearch(query);
+            } else {
+                showNoResults('Моля, въведете дума за търсене');
+            }
+        });
+
+        function performSearch(query) {
+            console.log('Performing search for:', query);
+            const searchQueryElement = document.getElementById('searchQuery');
+            searchQueryElement.textContent = `Търсене за: "${query}"`;
+
+            // Normalize search query (lowercase, trim)
+            const normalizedQuery = query.toLowerCase().trim();
+            console.log('Normalized query:', normalizedQuery);
+
+            // Search in product names and descriptions
+            searchResults = allProducts.filter(product => {
+                return product.name.toLowerCase().includes(normalizedQuery) ||
+                       product.description.toLowerCase().includes(normalizedQuery) ||
+                       product.category.toLowerCase().includes(normalizedQuery);
+            });
+
+            console.log('Search results count:', searchResults.length);
+            console.log('Search results:', searchResults);
+
+            if (searchResults.length === 0) {
+                showNoResults(`Няма намерени резултати за "${query}"`);
+            } else {
+                renderSearchResults();
+            }
+        }
+
+        function showNoResults(message) {
+            console.log('Showing no results:', message);
+            const searchQueryElement = document.getElementById('searchQuery');
+            searchQueryElement.textContent = message;
+            
+            document.getElementById('noResultsMessage').style.display = 'block';
+            document.getElementById('searchResultsGrid').style.display = 'none';
+        }
+
+        function renderSearchResults() {
+            console.log('Rendering', searchResults.length, 'results');
+            const resultsGrid = document.getElementById('searchResultsGrid');
+            const noResultsMessage = document.getElementById('noResultsMessage');
+
+            noResultsMessage.style.display = 'none';
+            resultsGrid.style.display = 'flex';
+
+            resultsGrid.innerHTML = searchResults.map((product, index) => {
+                const isFav = isFavorite(product.name);
+                const heartClass = isFav ? 'fas' : 'far';
+                
+                return `
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div class="card h-100 shadow-sm position-relative">
+                            <button class="btn btn-link position-absolute" style="top: 10px; right: 10px; z-index: 10;" 
+                                    onclick="toggleFavoriteFromSearch(${index}); this.querySelector('i').classList.toggle('fas'); this.querySelector('i').classList.toggle('far');" 
+                                    title="Добави в любими">
+                                <i class="${heartClass} fa-heart" style="font-size: 24px; color: #ff6b35;"></i>
+                            </button>
+                            <span class="badge bg-secondary position-absolute" style="top: 10px; left: 10px; z-index: 10;">${product.category}</span>
+                            <img src="${product.image}" alt="${product.name}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">${product.name}</h5>
+                                <p class="card-text text-muted small">${product.description}</p>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <span class="h5 mb-0 text-danger">${product.price.toFixed(2)} лв</span>
+                                    <button class="btn btn-sm btn-outline-primary" onclick="addToCartFromSearch(${index})" title="Добави в количката">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            console.log('Results rendered successfully');
+        }
+
+        function toggleFavoriteFromSearch(index) {
+            console.log('Toggle favorite for product at index:', index);
+            const product = searchResults[index];
+            if (typeof window.toggleFavorite === 'function') {
+                window.toggleFavorite(product.name, product.price, product.description, product.image);
+            } else {
+                console.error('window.toggleFavorite is not defined');
+            }
+        }
+
+        function addToCartFromSearch(index) {
+            console.log('Add to cart for product at index:', index);
+            const product = searchResults[index];
+            if (typeof window.addToCart === 'function') {
+                window.addToCart(product.name, product.price, product.description, product.image);
+            } else {
+                console.error('window.addToCart is not defined');
+                alert('Грешка: Функцията за добавяне в количката не е налична.');
+            }
+        }
+
+        function isFavorite(name) {
+            if (typeof window.isFavorite === 'function') {
+                return window.isFavorite(name);
+            }
+            const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            return favorites.some(item => item.name === name);
+        }
+    </script>
+}

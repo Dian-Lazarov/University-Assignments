@@ -1,0 +1,169 @@
+﻿@page
+@model PizzaHub.Pages.FavoritesModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Любими";
+}
+
+<div class="container py-5">
+    <h2 class="mb-4">Моите любими продукти</h2>
+
+    <!-- Empty Favorites Message -->
+    <div id="emptyFavoritesMessage" class="text-center py-5" style="display: none;">
+        <i class="fas fa-heart" style="font-size: 80px; color: #ddd; margin-bottom: 20px;"></i>
+        <h4 class="mb-3">Нямате любими продукти</h4>
+        <p class="text-muted mb-4">Добавете продукти в списъка с любими, за да ги видите тук.</p>
+        <a href="/" class="btn btn-primary">Разгледайте менюто</a>
+    </div>
+
+    <!-- Favorites Grid -->
+    <div id="favoritesGrid" class="row g-4">
+        <!-- Favorites items will be dynamically inserted here -->
+    </div>
+</div>
+
+<style>
+    .favorite-card {
+        /* Removed hover transform animation */
+    }
+
+    .remove-favorite-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: white;
+        border: none;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        z-index: 10;
+    }
+
+    .remove-favorite-btn:hover {
+        /* Removed red background on hover */
+        box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    }
+
+    .favorite-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .favorite-placeholder {
+        width: 100%;
+        height: 200px;
+        background-color: #f8f9fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .favorite-placeholder i {
+        font-size: 60px;
+        color: #ddd;
+    }
+</style>
+
+@section Scripts {
+    <script>
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderFavorites();
+        });
+
+        function renderFavorites() {
+            const favoritesGrid = document.getElementById('favoritesGrid');
+            const emptyMessage = document.getElementById('emptyFavoritesMessage');
+
+            if (favorites.length === 0) {
+                emptyMessage.style.display = 'block';
+                favoritesGrid.style.display = 'none';
+                return;
+            }
+
+            emptyMessage.style.display = 'none';
+            favoritesGrid.style.display = 'flex';
+
+            favoritesGrid.innerHTML = favorites.map((item, index) => {
+                let imageHTML;
+                if (item.image) {
+                    imageHTML = `<img src="${item.image}" alt="${item.name}" class="favorite-image">`;
+                } else {
+                    imageHTML = `<div class="favorite-placeholder"><i class="fas fa-image"></i></div>`;
+                }
+
+                return `
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div class="card favorite-card h-100 shadow-sm position-relative">
+                            <button class="remove-favorite-btn" onclick="removeFromFavorites(${index})" title="Премахни от любими">
+                                <i class="fas fa-times text-danger"></i>
+                            </button>
+                            ${imageHTML}
+                            <div class="card-body">
+                                <h5 class="card-title">${item.name}</h5>
+                                <p class="card-text text-muted small">${item.description || ''}</p>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <span class="h5 mb-0 text-danger">${item.price.toFixed(2)} лв</span>
+                                    <button class="btn btn-sm btn-primary" onclick="addToCartFromFavorites('${item.name}', ${item.price}, '${item.description}', '${item.image || ''}')">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function removeFromFavorites(index) {
+            const itemName = favorites[index].name;
+            if (confirm(`Сигурни ли сте, че искате да премахнете "${itemName}" от любими?`)) {
+                favorites.splice(index, 1);
+                saveFavorites();
+                renderFavorites();
+                updateFavoritesBadge();
+            }
+        }
+
+        function addToCartFromFavorites(name, price, description, imagePath) {
+            if (typeof window.addToCart === 'function') {
+                window.addToCart(name, price, description, imagePath);
+            } else {
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                
+                const existingItemIndex = cart.findIndex(item => item.name === name);
+                
+                if (existingItemIndex > -1) {
+                    cart[existingItemIndex].quantity++;
+                } else {
+                    cart.push({
+                        name: name,
+                        price: price,
+                        description: description,
+                        image: imagePath || null,
+                        quantity: 1
+                    });
+                }
+                
+                localStorage.setItem('cart', JSON.stringify(cart));
+                
+                if (typeof window.updateCartBadge === 'function') {
+                    window.updateCartBadge();
+                }
+                
+                alert(`${name} е добавена в количката!`);
+            }
+        }
+
+        function saveFavorites() {
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+        }
+    </script>
+}

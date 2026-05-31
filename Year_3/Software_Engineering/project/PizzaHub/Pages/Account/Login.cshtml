@@ -1,0 +1,32 @@
+﻿@page
+@model PizzaHub.Pages.Account.LoginModel
+@{
+    Layout = "_AuthLayout";
+    ViewData["Title"] = "Вход";
+}
+
+<div class="form-box">
+    <h2>Вход</h2>
+
+    <form method="post">
+        <div class="form-group">
+            <label for="username">Потребителско име:</label>
+            <input type="text" id="username" name="username" />
+        </div>
+
+        <div class="form-group">
+            <label for="password">Парола:</label>
+            <input type="password" id="password" name="password" />
+        </div>
+
+        <div class="button-group">
+            <button type="submit" class="btn-submit">Вход</button>
+            <a href="/" class="btn-cancel">Отказ</a>
+        </div>
+    </form>
+
+    <div class="auth-link">
+        Все още нямате профил?<br>
+        <a href="/Account/Register">Натиснете тук, за да се регистрирате!</a>
+    </div>
+</div>
