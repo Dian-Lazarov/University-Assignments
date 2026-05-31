@@ -1,0 +1,141 @@
+﻿@{
+    ViewData["Title"] = "Пици";
+}
+
+<section class="py-4">
+    <h2 class="mb-4">Пици</h2>
+    
+    <div class="row g-4">
+        <!-- Pizza Card 1 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm position-relative">
+                <button class="btn btn-link position-absolute" style="top: 10px; right: 10px; z-index: 10;" 
+                        onclick="toggleFavorite('Асорти', 12.99, 'Класическа пица', '/images/pizzas/asorti.png'); this.querySelector('i').classList.toggle('fas'); this.querySelector('i').classList.toggle('far');" 
+                        title="Добави в любими">
+                    <i class="far fa-heart" style="font-size: 24px; color: #ff6b35;"></i>
+                </button>
+                <img src="~/images/pizzas/asorti.png" alt="Асорти" class="card-img-top" style="height: 250px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">Асорти</h5>
+                    <p class="card-text text-muted"><b>Съставки:</b> доматен сос, моцарела, шунка, сирене, ч. лук, маслини, пушена шунка, бяло сирене, домати, пресен пипер</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="h5 mb-0 text-danger">12.99 лв</span>
+                        <button class="btn btn-sm btn-outline-primary" onclick="addToCart('Асорти', 12.99, 'Класическа пица', '/images/pizzas/asorti.png')" title="Добави в количката">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pizza Card 2 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm position-relative">
+                <button class="btn btn-link position-absolute" style="top: 10px; right: 10px; z-index: 10;" 
+                        onclick="toggleFavorite('Атина', 14.99, 'Пица Атина', '/images/pizzas/atina.png'); this.querySelector('i').classList.toggle('fas'); this.querySelector('i').classList.toggle('far');" 
+                        title="Добави в любими">
+                    <i class="far fa-heart" style="font-size: 24px; color: #ff6b35;"></i>
+                </button>
+                <img src="~/images/pizzas/atina.png" alt="Атина" class="card-img-top" style="height: 250px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">Атина</h5>
+                    <p class="card-text text-muted"><b>Съставки:</b> доматен сос, английски бекон, шпек, печен пипер, гъби, маслини, кисели краставички, кашкавал, топено сирене, домат</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="h5 mb-0 text-danger">14.99 лв</span>
+                        <button class="btn btn-sm btn-outline-primary" onclick="addToCart('Атина', 14.99, 'Пица Атина', '/images/pizzas/atina.png')" title="Добави в количката">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pizza Card 3 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm position-relative">
+                <button class="btn btn-link position-absolute" style="top: 10px; right: 10px; z-index: 10;" 
+                        onclick="toggleFavorite('Камен пица', 16.99, 'Камен пица', '/images/pizzas/kamen.png'); this.querySelector('i').classList.toggle('fas'); this.querySelector('i').classList.toggle('far');" 
+                        title="Добави в любими">
+                    <i class="far fa-heart" style="font-size: 24px; color: #ff6b35;"></i>
+                </button>
+                <img src="~/images/pizzas/kamen.png" alt="Камен пица" class="card-img-top" style="height: 250px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">Камен пица</h5>
+                    <p class="card-text text-muted"><b>Съставки:</b> Доматен сос, шунка, гъби, маслини, кашкавал, топено сирене</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="h5 mb-0 text-danger">16.99 лв</span>
+                        <button class="btn btn-sm btn-outline-primary" onclick="addToCart('Камен пица', 16.99, 'Камен пица', '/images/pizzas/kamen.png')" title="Добави в количката">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pizza Card 4 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm position-relative">
+                <button class="btn btn-link position-absolute" style="top: 10px; right: 10px; z-index: 10;" 
+                        onclick="toggleFavorite('Капричоза', 13.99, 'Пица Капричоза', '/images/pizzas/kaprichoza.png'); this.querySelector('i').classList.toggle('fas'); this.querySelector('i').classList.toggle('far');" 
+                        title="Добави в любими">
+                    <i class="far fa-heart" style="font-size: 24px; color: #ff6b35;"></i>
+                </button>
+                <img src="~/images/pizzas/kaprichoza.png" alt="Капричоза" class="card-img-top" style="height: 250px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">Капричоза</h5>
+                    <p class="card-text text-muted"><b>Съставки:</b> Доматен сос, шунка, бекон, гъби, печен пипер, кашкавал</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="h5 mb-0 text-danger">13.99 лв</span>
+                        <button class="btn btn-sm btn-outline-primary" onclick="addToCart('Капричоза', 13.99, 'Пица Капричоза', '/images/pizzas/kaprichoza.png')" title="Добави в количката">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pizza Card 5 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm position-relative">
+                <button class="btn btn-link position-absolute" style="top: 10px; right: 10px; z-index: 10;" 
+                        onclick="toggleFavorite('Морска пица', 15.99, 'Морска пица', '/images/pizzas/morska.png'); this.querySelector('i').classList.toggle('fas'); this.querySelector('i').classList.toggle('far');" 
+                        title="Добави в любими">
+                    <i class="far fa-heart" style="font-size: 24px; color: #ff6b35;"></i>
+                </button>
+                <img src="~/images/pizzas/morska.png" alt="Морска пица" class="card-img-top" style="height: 250px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">Морска пица</h5>
+                    <p class="card-text text-muted"><b>Съставки:</b> Доматен сос, риба тон, ролца от раци, маслини, кашкавал</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="h5 mb-0 text-danger">15.99 лв</span>
+                        <button class="btn btn-sm btn-outline-primary" onclick="addToCart('Морска пица', 15.99, 'Морска пица', '/images/pizzas/morska.png')" title="Добави в количката">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pizza Card 6 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm position-relative">
+                <button class="btn btn-link position-absolute" style="top: 10px; right: 10px; z-index: 10;" 
+                        onclick="toggleFavorite('Рене', 14.99, 'Пица Рене', '/images/pizzas/rene.png'); this.querySelector('i').classList.toggle('fas'); this.querySelector('i').classList.toggle('far');" 
+                        title="Добави в любими">
+                    <i class="far fa-heart" style="font-size: 24px; color: #ff6b35;"></i>
+                </button>
+                <img src="~/images/pizzas/rene.png" alt="Рене" class="card-img-top" style="height: 250px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">Рене</h5>
+                    <p class="card-text text-muted"><b>Съставки:</b> Доматен сос, пушен бут, гъби, шпек, грах, царевица, броколи, кашкавал, топено сирене, чубрица, лук, пресен пипер</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="h5 mb-0 text-danger">14.99 лв</span>
+                        <button class="btn btn-sm btn-outline-primary" onclick="addToCart('Рене', 14.99, 'Пица Рене', '/images/pizzas/rene.png')" title="Добави в количката">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

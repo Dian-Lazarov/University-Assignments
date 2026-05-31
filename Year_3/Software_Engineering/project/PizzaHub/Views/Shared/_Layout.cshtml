@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] | PizzaHub</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/PizzaHub.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow">
+            <div class="container-fluid">
+                <!-- Logo -->
+                <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/images/logo.png" alt="PizzaHub Logo" style="height: 40px; margin-right: 10px;" />
+                    <span class="fw-bold" style="font-size: 20px;">PizzaHub</span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" 
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Navigation Menu -->
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Pizzas">Пици</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Dishes">Ястия</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Drinks">Напитки</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Desserts">Десерти</a>
+                        </li>
+                    </ul>
+
+                    <!-- Right Side Controls -->
+                    <div class="d-flex align-items-center gap-3">
+                        <!-- Search Bar -->
+                        <form action="/Search" method="get" class="d-flex" style="width: 180px;">
+                            <input type="text" name="q" class="form-control form-control-sm" placeholder="Търсене..." required />
+                        </form>
+
+                        <!-- Working Hours -->
+                        <div class="text-nowrap">
+                            <small class="text-muted d-block">Работно време:</small>
+                            <small class="fw-bold">от 10:00 до 22:00</small>
+                        </div>
+
+                        <!-- Cart Icon -->
+                        <a href="/Cart" class="btn btn-link position-relative p-0">
+                            <i class="fas fa-shopping-cart" style="font-size: 20px; color: #ff6b35;"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cartBadge">0</span>
+                        </a>
+
+                        <!-- Favorites Icon -->
+                        <a href="/Favorites" class="btn btn-link position-relative p-0">
+                            <i class="fas fa-heart" style="font-size: 20px; color: #ff6b35;"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="favoritesBadge">0</span>
+                        </a>
+
+                        <!-- User Actions -->
+                        <a class="btn btn-sm btn-outline-primary" asp-page="/Account/Login">Вход</a>
+                        <a class="btn btn-sm btn-primary" asp-page="/Account/Register">Регистрация</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid">
+        <main role="main" class="py-4">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted mt-5" style="font-weight: bold">
+        <div class="container">
+            <div class="text-center py-3">
+                &copy; PizzaHub, 2025
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    
+    <script>
+        // Update badges on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartBadge();
+            updateFavoritesBadge();
+        });
+
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const badge = document.getElementById('cartBadge');
+            if (badge) {
+                badge.textContent = totalItems;
+            }
+        }
+
+        function updateFavoritesBadge() {
+            const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            const badge = document.getElementById('favoritesBadge');
+            if (badge) {
+                badge.textContent = favorites.length;
+            }
+        }
+
+        // Add to cart function
+        function addToCart(name, price, description, imagePath) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            const existingItemIndex = cart.findIndex(item => item.name === name);
+            
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity++;
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    description: description,
+                    image: imagePath || null,
+                    quantity: 1
+                });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartBadge();
+            alert(`${name} е добавена в количката!`);
+        }
+
+        // Add to favorites function
+        function toggleFavorite(name, price, description, imagePath) {
+            let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            
+            const existingIndex = favorites.findIndex(item => item.name === name);
+            
+            if (existingIndex > -1) {
+                // Remove from favorites
+                favorites.splice(existingIndex, 1);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                updateFavoritesBadge();
+                alert(`${name} е премахната от любими!`);
+                return false; // Not favorite anymore
+            } else {
+                // Add to favorites
+                favorites.push({
+                    name: name,
+                    price: price,
+                    description: description,
+                    image: imagePath || null
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                updateFavoritesBadge();
+                alert(`${name} е добавена в любими!`);
+                return true; // Is favorite now
+            }
+        }
+
+        // Check if item is in favorites
+        function isFavorite(name) {
+            const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            return favorites.some(item => item.name === name);
+        }
+
+        // Expose functions globally
+        window.updateCartBadge = updateCartBadge;
+        window.updateFavoritesBadge = updateFavoritesBadge;
+        window.addToCart = addToCart;
+        window.toggleFavorite = toggleFavorite;
+        window.isFavorite = isFavorite;
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

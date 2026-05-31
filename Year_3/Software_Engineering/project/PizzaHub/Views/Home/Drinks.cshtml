@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Напитки";
+}
+
+<section class="py-4">
+    <h2 class="mb-4">Напитки</h2>
+    
+    <div class="row g-4">
+        <!-- Drink 1 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm position-relative">
+                <button class="btn btn-link position-absolute" style="top: 10px; right: 10px; z-index: 10;" 
+                        onclick="toggleFavorite('Минерална вода – 500 мл', 2.49, 'Минерална вода', '/images/drinks/mineralna.png'); this.querySelector('i').classList.toggle('fas'); this.querySelector('i').classList.toggle('far');" 
+                        title="Добави в любими">
+                    <i class="far fa-heart" style="font-size: 24px; color: #ff6b35;"></i>
+                </button>
+                <img src="~/images/drinks/mineralna.png" alt="Минерална вода" class="card-img-top" style="height: 250px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">Минерална вода – 500 мл</h5>
+                    <p class="card-text text-muted"></p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="h5 mb-0 text-danger">2.49 лв</span>
+                        <button class="btn btn-sm btn-outline-primary" onclick="addToCart('Минерална вода – 500 мл', 2.49, 'Минерална вода', '/images/drinks/mineralna.png')" title="Добави в количката">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Drink 2 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm position-relative">
+                <button class="btn btn-link position-absolute" style="top: 10px; right: 10px; z-index: 10;" 
+                        onclick="toggleFavorite('Каменица – 500 мл', 2.99, 'Бира', '/images/drinks/kamenitsa.png'); this.querySelector('i').classList.toggle('fas'); this.querySelector('i').classList.toggle('far');" 
+                        title="Добави в любими">
+                    <i class="far fa-heart" style="font-size: 24px; color: #ff6b35;"></i>
+                </button>
+                <img src="~/images/drinks/kamenitsa.png" alt="Каменица" class="card-img-top" style="height: 250px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">Каменица – 500 мл</h5>
+                    <p class="card-text text-muted"></p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="h5 mb-0 text-danger">2.99 лв</span>
+                        <button class="btn btn-sm btn-outline-primary" onclick="addToCart('Каменица – 500 мл', 2.99, 'Бира', '/images/drinks/kamenitsa.png')" title="Добави в количката">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Drink 3 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm position-relative">
+                <button class="btn btn-link position-absolute" style="top: 10px; right: 10px; z-index: 10;" 
+                        onclick="toggleFavorite('Фанта – 500 мл', 3.99, 'Безалкохолна напитка', '/images/drinks/fanta.png'); this.querySelector('i').classList.toggle('fas'); this.querySelector('i').classList.toggle('far');" 
+                        title="Добави в любими">
+                    <i class="far fa-heart" style="font-size: 24px; color: #ff6b35;"></i>
+                </button>
+                <img src="~/images/drinks/fanta.png" alt="Фанта" class="card-img-top" style="height: 250px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">Фанта – 500 мл</h5>
+                    <p class="card-text text-muted"></p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="h5 mb-0 text-danger">3.99 лв</span>
+                        <button class="btn btn-sm btn-outline-primary" onclick="addToCart('Фанта – 500 мл', 3.99, 'Безалкохолна напитка', '/images/drinks/fanta.png')" title="Добави в количката">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
